@@ -239,7 +239,8 @@ with chat_container:
                         response_text += f"💡 **Analisis AI:** Kombinasi ini dipilih karena memiliki keseimbangan risiko dan keuntungan yang optimal berdasarkan fluktuasi pasar saat ini. Pastikan untuk mengecek lineup resmi 1 jam sebelum kick-off."
                 
                 st.markdown(response_text)
-                st.session_state.messages.append({"role": "assistant", "content": response_text})        st.write(f"Estimasi Kemenangan: **{potential_win:,.2f}**")
+                st.session_state.messages.append({"role": "assistant", "content": response_text})        
+                st.write(f"Estimasi Kemenangan: **{potential_win:,.2f}**")
         
         if st.button("🗑️ Reset Parlay"):
             st.session_state.parlay_list = []
