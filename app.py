@@ -168,7 +168,7 @@ with st.sidebar:
 
 # --- FUNGSI UTILITAS (DATA FETCHING) ---
 def fetch_odds(key, league_code):
-    """Mengambil data odds dari API eksternal"""
+    ""Mengambil data odds dari API eksternal""
     if not key:
         return None
     url = f"https://api.the-odds-api.com/v4/sports/{league_code}/odds/?apiKey={key}&regions=eu&markets=h2h"
