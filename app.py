@@ -60,7 +60,8 @@ if st.session_state.history:
     profit = df_h['Profit'].sum()
     st.sidebar.metric("NET PROFIT", f"Rp {profit:,}", delta=f"{profit:,}")
     win_rate = (df_h['Status'] == 'WIN').sum() / len(df_h) * 100
-    st.sidebar.write(f"**Win Rate:** {win_rate:.1f}%\")
+    # BAGIAN YANG DIPERBAIKI (BACKSLASH DIHAPUS):
+    st.sidebar.write(f"**Win Rate:** {win_rate:.1f}%")
 
 # --- CORE LOGIC ---
 def scan_global(key):
@@ -162,7 +163,7 @@ with t3:
         res_upd = st.selectbox("Update Status", ["WIN", "LOSE"])
         if st.button("CONFIRM UPDATE"):
             st.session_state.history[idx_upd]["Status"] = res_upd
-            s, o = st.session_state.history[idx_upd]["Stake"], st.session_state.history[idx_upd]["Odds"]
+            s, o = st.session_state.history[idx_upd]["Stake"], st.session_state.history[idx_upd][["Odds"]]
             profit = (s * o) - s if res_upd == "WIN" else -s
             st.session_state.history[idx_upd]["Profit"] = profit
             cp = 0
