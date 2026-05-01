@@ -131,8 +131,9 @@ with t1:
 # ... [Isi kode tab t2, t3, t4 sama dengan V10 sebelumnya] ...
 
 st.markdown("---")
-st.caption("© 2026 prediksibola.id | ELANGBOLA AI Syndicate | Developed for Randy Sanjaya")
-    </style>
+st.caption("© 2026 prediksibola.id | ELANGBOLA AI Syndicate | Developed for Elangbola")
+   
+</style>
     """, unsafe_allow_html=True)
 
 # --- JUDUL APLIKASI ---
