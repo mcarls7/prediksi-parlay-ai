@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import requests
 import random
-import plotly.express as px
 from datetime import datetime
 
 # --- KONFIGURASI FINAL: ELANGBOLA AI (prediksibola.id) ---
@@ -61,7 +60,7 @@ if st.session_state.history:
     profit = df_h['Profit'].sum()
     st.sidebar.metric("NET PROFIT", f"Rp {profit:,}", delta=f"{profit:,}")
     win_rate = (df_h['Status'] == 'WIN').sum() / len(df_h) * 100
-    st.sidebar.write(f"**Win Rate:** {win_rate:.1f}%")
+    st.sidebar.write(f"**Win Rate:** {win_rate:.1f}%\")
 
 # --- CORE LOGIC ---
 def scan_global(key):
@@ -158,10 +157,6 @@ with t3:
     st.subheader("📈 Performance Analytic")
     if st.session_state.history:
         df_log = pd.DataFrame(st.session_state.history)
-        fig = px.area(df_log, x=df_log.index, y="CumProfit", title="Bankroll Growth", markers=True)
-        fig.update_traces(line_color='#1b5e20', fillcolor='rgba(27, 94, 32, 0.2)')
-        st.plotly_chart(fig, use_container_width=True)
-        
         st.markdown("---")
         idx_upd = st.number_input("Index Tiket", min_value=0, max_value=len(st.session_state.history)-1)
         res_upd = st.selectbox("Update Status", ["WIN", "LOSE"])
@@ -176,6 +171,7 @@ with t3:
                 st.session_state.history[i]["CumProfit"] = cp
             st.rerun()
         st.table(df_log)
+    else: st.info("Belum ada data.")
 
 with t4:
     st.subheader("🛡️ Professional Risk Management")
@@ -184,5 +180,5 @@ with t4:
     c2.info(f"💡 **Saran Bet Aman:** Rp {bankroll * 0.05:,.0f} (5%)")
 
 st.markdown("---")
-st.caption("© 2026 prediksibola.id | ELANGBOLA AI | Developed for Elangbola")
-                    
+st.caption("© 2026 prediksibola.id | ELANGBOLA AI | Sehati Gas! Ragu Skip!")
+    
