@@ -1,0 +1,38 @@
+import pandas as pd
+from datetime import datetime
+
+def save_to_history(conn, details, total_odds, stake):
+    """
+    Saves the current parlay ticket to the connected Google Sheet.
+    
+    Args:
+        conn: The Streamlit GSheetsConnection object.
+        details (list): List of strings describing each leg of the parlay.
+        total_odds (float): The combined odds of the parlay.
+        stake (float): The amount wagered.
+        
+    Returns:
+        bool: True if successful, False otherwise.
+    """
+    try:
+        new_data = pd.DataFrame([{
+            "Tanggal": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "Detail Parlay": ", ".join(details),
+            "Total Odds": round(total_odds, 2),
+            "Modal": stake,
+            "Estimasi": round(stake * total_odds, 2),
+            "Status": "Pending"
+        }])
+        
+        # Read existing data to append
+        existing_data = conn.read()
+        
+        # Concatenate new data with existing data
+        updated_df = pd.concat([existing_data, new_data], ignore_index=True)
+        
+        # Update the sheet
+        conn.update(data=updated_df)
+        return True
+    except Exception as e:
+        print(f"Error saving to history: {e}")
+        return False
